@@ -80,7 +80,7 @@ impl Graph {
             let current_node = self.nodes.iter().find(|x| x.value == current_node_value).unwrap();
 
             for node_value in &current_node.nodes {
-                if !current_path.contains(&node_value) || node_value.to_ascii_uppercase() == *node_value {
+                if Self::can_visit_cave(next_path.clone(), &node_value) {
                     let mut node_paths = self.build_path(node_value, next_path.clone());
 
                     paths.append(&mut node_paths);
@@ -89,5 +89,36 @@ impl Graph {
         }
 
         paths
+    }
+
+    fn can_visit_cave(current_path: Vec<&str>, node_value: &&&str) -> bool {
+        match **node_value {
+            "start" => false,
+            s => {
+                // big caves always OK
+                if s == s.to_ascii_uppercase() {
+                    return true
+                }
+
+                // Must be small cave and not start or end
+
+                if !current_path.iter().find(|x| ***x == *s).is_some() {
+                    // Does not already have current cave
+                    return true
+                }
+
+                for i in 0..current_path.len() {
+                    if *current_path[i] == current_path[i].to_ascii_lowercase() {
+                        for j in i+1..current_path.len() {
+                            if *current_path[i] == *current_path[j] {
+                                return false
+                            }
+                        }
+                    }
+                }
+
+                return true
+            }
+        }
     }
 }

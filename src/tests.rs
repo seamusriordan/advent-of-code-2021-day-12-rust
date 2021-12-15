@@ -3,26 +3,26 @@
 mod tests {
     use crate::Graph;
 
-    #[test]
-    fn first_sample_input_has_10_paths() {
-        let input = "start-A
-start-b
-A-c
-A-b
-b-d
-A-end
-b-end".lines();
-
-        let graph = Graph::from_lines(input);
-
-        let paths = graph.get_paths();
-
-        for path in &paths {
-            println!("{:?}", path);
-        }
-
-        assert_eq!(10, paths.len());
-    }
+//     #[test]
+//     fn first_sample_input_has_10_paths() {
+//         let input = "start-A
+// start-b
+// A-c
+// A-b
+// b-d
+// A-end
+// b-end".lines();
+//
+//         let graph = Graph::from_lines(input);
+//
+//         let paths = graph.get_paths();
+//
+//         for path in &paths {
+//             println!("{:?}", path);
+//         }
+//
+//         assert_eq!(10, paths.len());
+//     }
 
     #[test]
     fn second_sample_input_has_19_paths() {
@@ -41,11 +41,11 @@ kj-dc".lines();
 
         let paths = graph.get_paths();
 
-        for path in &paths {
+        for path in paths.clone() {
             println!("{:?}", path);
-        }
 
-        assert_eq!(19, paths.len());
+        }
+        assert_eq!(103, paths.len());
     }
     #[test]
     fn third_sample_input_has_226_paths() {
@@ -72,10 +72,7 @@ start-RW".lines();
 
         let paths = graph.get_paths();
 
-        for path in &paths {
-            println!("{:?}", path);
-        }
 
-        assert_eq!(226, paths.len());
+        assert_eq!(3509, paths.len());
     }
 }
