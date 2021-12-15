@@ -80,7 +80,7 @@ impl Graph {
             let current_node = self.nodes.iter().find(|x| x.value == current_node_value).unwrap();
 
             for node_value in &current_node.nodes {
-                if !current_path.contains(&node_value) || node_value.to_ascii_uppercase() == String::from(*node_value) {
+                if !current_path.contains(&node_value) || node_value.to_ascii_uppercase() == *node_value {
                     let mut node_paths = self.build_path(node_value, next_path.clone());
 
                     paths.append(&mut node_paths);
